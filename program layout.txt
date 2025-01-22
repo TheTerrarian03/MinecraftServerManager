@@ -1,0 +1,40 @@
+UI Interactions:
+- Server all
+  - Start all
+  - Restart all
+  - Stop all
+  - Enable/Disable
+- Playit.gg
+  - Start
+  - Restart
+  - Stop
+  - Enable/Disable
+- Settings
+  - Save config
+  - Load config
+  - Autoload
+
+Backend info:
+{
+  "servers": [
+    {
+      "name": "server 1",
+      "port": "25565",
+      "address": "writing-cir.gl.joinmc.link",
+      "root dir": "/....",
+      "server jar dir": "/..."
+    },
+    {
+      "name": "server 2",
+      "port": "25564",
+      "address": "wish-for.gl.joinmc.link",
+      "root dir": "/....",
+      "server jar dir": "/..."
+    }
+  ],
+  "services": [
+    "mc_25565",
+    "mc_25564"
+  ],
+  "playit script dir": "/..."
+}

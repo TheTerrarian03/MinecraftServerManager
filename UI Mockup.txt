@@ -1,0 +1,23 @@
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X                   X                 X                                X
+X     [Servers]     X   [Playit.gg]   X  Playit.gg ○                   X
+X                   X                 X  > writing-cir.gl.joinmc.link  X
+X   Start All       X  Start          X                                X
+X   Restart All     X  Restart        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X   Stop All        X  Stop           X                                X
+X   Enable All      X  Enable         X  "Server 1"                    X
+X                   X                 X  Port 25565 ○                  X
+X   Manage One ^    X                 X  "writing-cir.gl.joinmc.link"  X
+X   New Server +    X                 X                                X
+X                   X                 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                X
+X                   X                 X  "Server 1"                    X
+X     [Settings]    X     [Memory]    X  Port 25564 ○                  X
+X                   X  ▓▓▓▓▓▓▓▓▓▒░░░░  X  "wish-for.gl.joinmc.link"     X
+X   Save Config     X                 X                                X
+X   Load Config     X     [CPU %]     XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X   Auto-load       X  ▓▓▓▒░░░░░░░░░░  X
+X                   X                 X
+X   Close           X  Network: ○     X
+X                   X                 X
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

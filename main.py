@@ -1,35 +1,38 @@
 import curses
 import time
+import ui
 
 def main_menu(stdscr: curses.window):
-    curses.curs_set(0)
-    stdscr.clear()
-
-    menu_options = ["1) Print hello", "2) Clock", "3) Exit"]
-    current_option = 0
-
-    while True:
-        stdscr.clear()
-        for idx, option in enumerate(menu_options):
-            if idx == current_option:
-                stdscr.addstr(idx, 0, option, curses.A_REVERSE)
-            else:
-                stdscr.addstr(idx, 0, option)
+    ui.main_menu(stdscr)
     
-        stdscr.refresh()
-        key = stdscr.getch()
+    # curses.curs_set(0)
+    # stdscr.clear()
 
-        if key == curses.KEY_UP and current_option > 0:
-            current_option -= 1
-        elif key == curses.KEY_DOWN and current_option < len(menu_options) - 1:
-            current_option += 1
-        elif key == curses.KEY_ENTER or key in [10, 13]:
-            if current_option == 0:
-                message_window(stdscr, "Hello!")
-            elif current_option == 1:
-                time_window(stdscr)
-            elif current_option == 2:
-                quit()
+    # menu_options = ["1) Print hello", "2) Clock", "3) Exit"]
+    # current_option = 0
+
+    # while True:
+    #     stdscr.clear()
+    #     for idx, option in enumerate(menu_options):
+    #         if idx == current_option:
+    #             stdscr.addstr(idx, 0, option, curses.A_REVERSE)
+    #         else:
+    #             stdscr.addstr(idx, 0, option)
+    
+    #     stdscr.refresh()
+    #     key = stdscr.getch()
+
+    #     if key == curses.KEY_UP and current_option > 0:
+    #         current_option -= 1
+    #     elif key == curses.KEY_DOWN and current_option < len(menu_options) - 1:
+    #         current_option += 1
+    #     elif key == curses.KEY_ENTER or key in [10, 13]:
+    #         if current_option == 0:
+    #             message_window(stdscr, "Hello!")
+    #         elif current_option == 1:
+    #             time_window(stdscr)
+    #         elif current_option == 2:
+    #             quit()
         
 def message_window(stdscr: curses.window, message):
     stdscr.clear()

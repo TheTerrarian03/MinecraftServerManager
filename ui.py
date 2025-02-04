@@ -13,8 +13,12 @@ class MainMenu:
         # subwindows
         self.main_window = None
         self.playit_window = None
-        self.server_windows = None
+        self.server_window = None
         self.stat_window = None
+
+        # temp vars for status
+        self.playit_online = False
+        self.server1_online = False
     
     def dimensions_changed(self):
         height, width = self.screen.getmaxyx()
@@ -28,10 +32,11 @@ class MainMenu:
     def update_window_dimensions(self):
         self.main_window = curses.newwin(19, 30, 0, 0)
         self.playit_window = curses.newwin(6, 36, 0, 30)
-        self.server_windows = curses.newwin(7, 36, 7, 30)
-        self.stat_window = curses.newwin(9, 36, 15, 30)
+        self.server_window = curses.newwin(7, 36, 6, 30)
+        self.stat_window = curses.newwin(9, 36, 13, 30)
     
     def draw_main(self):
+        self.main_window.clear()
         self.main_window.border(0)
 
         self.main_window.addstr(2, 9, "[Services]")
@@ -52,6 +57,37 @@ class MainMenu:
 
         self.main_window.refresh()
 
+    def draw_playit(self):
+        self.playit_window.clear()
+        self.playit_window.border(0)
+
+        self.playit_window.addstr(2, 2, f"Playit.gg - {"Online" if self.playit_online else "Offline"}")
+        self.playit_window.addstr(3, 2, "> writing-cir.gl.joinmc.link")
+
+        self.playit_window.refresh()
+    
+    def draw_server(self):
+        self.server_window.clear()
+        self.server_window.border(0)
+
+        self.server_window.addstr(2, 2, "\"Server 1\"")
+        self.server_window.addstr(3, 2, "Port 25565")
+        self.server_window.addstr(4, 2, "\"writing-cir.gl.joinmc.link\"")
+
+        self.server_window.refresh()
+
+    def draw_stats(self):
+        self.stat_window.clear()
+        self.stat_window.border(0)
+
+        self.stat_window.addstr(2, 14, "[Memory]")
+        self.stat_window.addstr(3, 4, "▓▓▓▓▓▓▓▓▒░░░░░░░░░░░░░░░░░░░")
+        
+        self.stat_window.addstr(5, 16, "[CPU]")
+        self.stat_window.addstr(6, 4, "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒░░░░░░░░")
+
+        self.stat_window.refresh()
+
     def draw_and_handle(self):
         if self.dimensions_changed():
             self.update_dimension()
@@ -62,6 +98,9 @@ class MainMenu:
 
         while True:
             self.draw_main()  # Draw the main window
+            self.draw_playit()
+            self.draw_server()
+            self.draw_stats()
 
             key = self.screen.getch()  # Non-blocking getch
 
@@ -70,6 +109,11 @@ class MainMenu:
             elif key == curses.KEY_DOWN and self.current_selection < 8:  # Adjust based on your menu length
                 self.current_selection += 1
             elif key == curses.KEY_ENTER or key in [10, 13]:
-                if self.current_selection == 8: break
+                match self.current_selection:
+                    case 8: break
+                    case 3: 
+                        self.playit_online = True
+                    case 2: 
+                        self.playit_online = False
             elif key == ord('q'):  # Press 'q' to exit
                 break

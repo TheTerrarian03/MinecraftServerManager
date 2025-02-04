@@ -1,3 +1,24 @@
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X                          XX                                X
+X        [Services]        XX  Playit.gg ○                   X
+X    Manage A Server       XX  > writing-cir.gl.joinmc.link  X
+X    Manage Playit         XX                                X
+X    Stop All              XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X    (Re)Start All         XX                                X
+X                          XX  "Server 1"                    X
+X         [Config]         XX  Port 25565 ○                  X
+X    Save Config           XX  "writing-cir.gl.joinmc.link"  X
+X    Load Config           XX                                X
+X                          XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X         [System]         XX                                X
+X    Write Services        XX            [Memory]            X
+X    Auto-load Services    XX  ▓▓▓▓▓▓▓▓▒░░░░░░░░░░░░░░░░░░░  X
+X                          XX                                X
+X           Quit           XX             [CPU]              X
+X                          XX  ▓▓▓▓▓▓▓▓▒░░░░░░░░░░░░░░░░░░░  X
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                X
+                            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 X                   X                 X                                X
 X     [Servers]     X   [Playit.gg]   X  Playit.gg ○                   X

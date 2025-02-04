@@ -1,0 +1,5 @@
+screen check for named session:
+- screen -S [name] -Q select . ; echo $?
+  > returns 0 if found
+  > returns "No screen session found\n1"
+

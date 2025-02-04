@@ -3,7 +3,10 @@ import time
 import ui
 
 def main_menu(stdscr: curses.window):
-    ui.main_menu(stdscr)
+    main_menu = ui.MainMenu(stdscr)
+
+    # while (1):
+    main_menu.draw_and_handle()
     
     # curses.curs_set(0)
     # stdscr.clear()
@@ -34,28 +37,28 @@ def main_menu(stdscr: curses.window):
     #         elif current_option == 2:
     #             quit()
         
-def message_window(stdscr: curses.window, message):
-    stdscr.clear()
-    stdscr.addstr(0, 0, message)
-    stdscr.addstr(1, 0, "Press any key to return the main menu")
-    stdscr.refresh()
-    stdscr.getch()
+# def message_window(stdscr: curses.window, message):
+#     stdscr.clear()
+#     stdscr.addstr(0, 0, message)
+#     stdscr.addstr(1, 0, "Press any key to return the main menu")
+#     stdscr.refresh()
+#     stdscr.getch()
 
-def time_window(stdscr: curses.window):
-    stdscr.clear()
-    stdscr.addstr(0, 0, "Current Time:")
-    stdscr.refresh()
+# def time_window(stdscr: curses.window):
+#     stdscr.clear()
+#     stdscr.addstr(0, 0, "Current Time:")
+#     stdscr.refresh()
 
-    stdscr.timeout(100)
+#     stdscr.timeout(100)
 
-    while True:
-        current_time = time.strftime("%H:%M:%S")
-        stdscr.addstr(1, 0, current_time)
-        stdscr.refresh()
-        time.sleep(1)
+#     while True:
+#         current_time = time.strftime("%H:%M:%S")
+#         stdscr.addstr(1, 0, current_time)
+#         stdscr.refresh()
+#         time.sleep(1)
 
-        if stdscr.getch() != -1:
-            break
+#         if stdscr.getch() != -1:
+#             break
 
 if __name__ == "__main__":
     curses.wrapper(main_menu)

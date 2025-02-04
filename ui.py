@@ -1,45 +1,75 @@
 import curses
 import time
 
-def main_menu(stdscr: curses.window):
-    curses.curs_set(0)
-    stdscr.clear()
+class MainMenu:
+    def __init__(self, screen: curses.window):
+        self.current_selection = 0
+        self.screen = screen
 
-    menu_options = ["Hello", "world"]
-    current_option = 0
+        # screen dimensions
+        self.screen_height = -1
+        self.screen_width = -1
 
-    while True:
-        stdscr.clear()
-        window_border(stdscr, 10, 4, 0, 0)
-
-        for idx, option in enumerate(menu_options):
-            if idx == current_option:
-                stdscr.addstr(idx+1, 1, option, curses.A_REVERSE)
-            else:
-                stdscr.addstr(idx+1, 1, option)
+        # subwindows
+        self.main_window = None
+        self.playit_window = None
+        self.server_windows = None
+        self.stat_window = None
     
-        stdscr.refresh()
-        key = stdscr.getch()
+    def dimensions_changed(self):
+        height, width = self.screen.getmaxyx()
+        if self.screen_height != height or self.screen_width != width:
+            return True
+        return False
 
-        if key == curses.KEY_UP and current_option > 0:
-            current_option -= 1
-        elif key == curses.KEY_DOWN and current_option < len(menu_options) - 1:
-            current_option += 1
-        elif key == curses.KEY_ENTER or key in [10, 13]:
-            return
+    def update_dimension(self):
+        self.screen_height, self.screen_width = self.screen.getmaxyx()
 
-def window_border(stdscr: curses.window, width: int, height:int, x: int, y: int):
-    # top border
-    stdscr.addch(y, x, 'x');
-    stdscr.addstr(y, x+1, "-"*(width-2))    
-    stdscr.addch(y, x+width-1, 'x')
+    def update_window_dimensions(self):
+        self.main_window = curses.newwin(19, 30, 0, 0)
+        self.playit_window = curses.newwin(6, 36, 0, 30)
+        self.server_windows = curses.newwin(7, 36, 7, 30)
+        self.stat_window = curses.newwin(9, 36, 15, 30)
+    
+    def draw_main(self):
+        self.main_window.border(0)
 
-    # middle borders
-    for i in range(height+1, height):
-        stdscr.addch(y+i, x, '|')
-        stdscr.addch(y+i, x+width+4, '|')
+        self.main_window.addstr(2, 9, "[Services]")
+        self.main_window.addstr(3, 5, "Manage A Server", curses.A_REVERSE if self.current_selection == 0 else curses.A_NORMAL)
+        self.main_window.addstr(4, 5, "Manage Playit", curses.A_REVERSE if self.current_selection == 1 else curses.A_NORMAL)
+        self.main_window.addstr(5, 5, "Manage Stop All", curses.A_REVERSE if self.current_selection == 2 else curses.A_NORMAL)
+        self.main_window.addstr(6, 5, "Manage (Re)Start All", curses.A_REVERSE if self.current_selection == 3 else curses.A_NORMAL)
 
-    # bottom border
-    stdscr.addch(y+height-1, x, 'x');
-    stdscr.addstr(y+height-1, x+1, "-"*(width-2))    
-    stdscr.addch(y+height-1, x+width-1, 'x')
+        self.main_window.addstr(8, 9, "[Config]")
+        self.main_window.addstr(9, 5, "Save Config", curses.A_REVERSE if self.current_selection == 4 else curses.A_NORMAL)
+        self.main_window.addstr(10, 5, "Load Config", curses.A_REVERSE if self.current_selection == 5 else curses.A_NORMAL)
+
+        self.main_window.addstr(12, 9, "[System]")
+        self.main_window.addstr(13, 5, "Write Services", curses.A_REVERSE if self.current_selection == 6 else curses.A_NORMAL)
+        self.main_window.addstr(14, 5, "Auto-load Services", curses.A_REVERSE if self.current_selection == 7 else curses.A_NORMAL)
+
+        self.main_window.addstr(16, 9, "Quit", curses.A_REVERSE if self.current_selection == 8 else curses.A_NORMAL)
+
+        self.main_window.refresh()
+
+    def draw_and_handle(self):
+        if self.dimensions_changed():
+            self.update_dimension()
+            self.update_window_dimensions()
+
+        curses.curs_set(0)
+        self.screen.timeout(100)  # Set a timeout for getch to avoid blocking
+
+        while True:
+            self.draw_main()  # Draw the main window
+
+            key = self.screen.getch()  # Non-blocking getch
+
+            if key == curses.KEY_UP and self.current_selection > 0:
+                self.current_selection -= 1
+            elif key == curses.KEY_DOWN and self.current_selection < 8:  # Adjust based on your menu length
+                self.current_selection += 1
+            elif key == curses.KEY_ENTER or key in [10, 13]:
+                if self.current_selection == 8: break
+            elif key == ord('q'):  # Press 'q' to exit
+                break
